@@ -1,0 +1,54 @@
+      <!--main content start-->
+      <section id="main-content" ng-controller="myteamController">
+          <section class="wrapper site-min-height">
+          	<div class="row mt">
+          		<div class="col-lg-12">
+
+			<div class="row" style="margin-top: ">
+              <div class="col-lg-12">
+         
+        <div class="col-lg-12 col-md-12 col-sm-12 mb">
+              <!-- TEAMS -->
+          <div class="ds pn">
+            <h3>Super Teams</h3>
+             <!-- First Member -->
+                        <div ng-repeat="team in data.teams">
+                          <a class="links" href="#/team/{{team.TID}}">
+                             <div class="desc">
+                              <div class="thumb">
+                                <img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
+                                </div>
+                              <div class="details">
+                                  <p><a class="links" href="#/team/{{team.TID}}">Team #{{team.TID}}! Total Hours: {{team.Manhours}}</a><br/>
+                                     <muted>Number of People {{team.TeamSize}}</muted>
+                                  </p>
+                                </div>
+                              </div>
+                          </a>
+                        </div>
+                            
+			      <!-- create new -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://cdn.shopify.com/s/files/1/0249/9285/t/2/assets/plus_mark.ico?21281" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Create A New Super Team</a><br/>
+                                      <muted>Anybody can be a super hero!</muted>
+                                  </p>
+                                </div>
+                              </div>
+
+            </div>
+        </div><!--/col-md-4 -->
+
+        </div><! --/row -->
+					
+          		</div>
+          	</div>
+			
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+      

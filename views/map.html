@@ -1,0 +1,147 @@
+<section id="main-content" ng-controller="mapController" ng-init="initialized">
+	<section class="wrapper site-min-height">
+		<div class="row">
+			<div class="col-lg-14 ds">
+				<!--<p>Place your content here.</p>-->
+                <h2>Map of Opportunities</h2>
+				<div class="form-panel">
+					<style>
+					/*.google-maps {
+						position: relative;
+						padding-bottom: 75%; // This is the aspect ratio
+						height: 0;
+						overflow: hidden;
+					}*/
+
+
+					</style>
+					<div class="google-maps" id="map_canvas">
+						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                    </div>
+
+                    <div id="map_canvas" ui-map="myMap" 
+                      style="height:300px;width:100%;border:2px solid #777777;margin:3px; border:1px solid" 
+                      ui-options="mapOptions" 
+                      ui-event="{'map-idle' : 'onMapIdle()'}"
+                      >
+                    </div>
+                </div>
+
+                    <div class="form-panel">
+                    	<h4 class="mb"><i class="fa fa-angle-right"></i> Filters</h4>
+                    	<form class="form-horizontal style-form" method="get">
+                    		<div class="form-group">
+                    			<label class="col-sm-2 col-sm-2 control-label">Within:</label>
+                    			<div class="col-sm-10">
+                    				<select class="form-control">
+                    					<option>25 miles </option>
+                    					<option>50 miles</option>
+                    					<option>75 miles</option>
+                    					<option>100 miles</option>
+                    					<option>150 miles</option>
+                    					<option>200+ miles</option>
+                    				</select>
+                    			</div>
+
+                    			<label class="col-sm-2 col-sm-2 control-label">Location:</label>
+                    			<div class="col-sm-10">
+                    				<input type="text" class="form-control">
+                    			</div>
+                    		</div>
+                    	</form>
+                                                                <!--<div>
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Supports a Cause</h4>
+                                <form class="form-horizontal style-form" method="get">
+                                    <div class="form-group">
+                                    <div class="col-sm-6 text-center">
+                                        <input type="checkbox" checked="" data-toggle="switch" />
+                                    </div>
+                                    </div>
+                                </form>
+                            </div>-->
+                            <!--<h4 class="mb"><i class="fa fa-angle-right"></i> Filter by Skills</h4>-->
+                            <form class="form-horizontal style-form" method="get">
+                            	<div class="form-group">
+                            		<label class="col-sm-2 col-sm-2 control-label">Filter by Skills:</label>
+                            		<div class="col-sm-10">
+                            			<select class="form-control">
+                            				<option>Administrative & Clerical</option>
+                            				<option>Animals & the Environment</option>
+                            				<option>Arts</option>
+                            				<option>Back Office, IT Infrastructure & Administration</option>
+                            				<option>Business Process Applications (CRM/ERP)</option>
+                            				<option>Children & Family</option>
+                            				<option>Disaster Relief</option>
+                            				<option>Education & Sports</option>
+                            				<option>Engineering</option>
+                            				<option>Finance</option>
+                            				<option>Food Service & Events</option>
+                            				<option>Healthcare</option>
+                            				<option>HR</option>
+                            				<option>Interactive, Web & Front Office</option>
+                            				<option>Languages</option>
+                            				<option>Legal</option>
+                            				<option>Logistics, Supply Chain & Transportation</option>
+                            				<option>Marketing</option>
+                            				<option>Marketing & Communications</option>
+                            				<option>Real Estate, Facilities & Construction</option>
+                            				<option>Sales & Fundraising</option>
+                            				<option>Strategy Development & Business Planning</option>
+
+                            			</select>
+                            		</div>
+                            	</div>
+                            </form>
+                            <!--<div id="map_canvas"></div>-->
+                            <!--<h4 class="mb"><i class="fa fa-angle-right"></i>Number of People</h4>-->
+                            <form class="form-horizontal style-form" method="get">
+                            	<div class="form-group">
+                            		<label class="col-sm-2 col-sm-2 control-label">Number of People:</label>
+                            		<div class="col-sm-10">
+                            			<select class="form-control">
+                            				<option>1</option>
+                            				<option>2</option>
+                            				<option>3-5</option>
+                            				<option>6-10</option>
+                            				<option>10+</option>
+                            			</select>
+                            		</div>
+                            	</div>
+                            </form>
+
+
+                            <!--<h4 class="mb"><i class="fa fa-angle-right"></i> Filter by Date</h4>-->
+                            <title>jQuery UI Datepicker - Default functionality</title>
+                            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+                            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+                            <script src="//csde.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+                            <link rel="stylesheet" href="/resources/demos/style.css">
+                            <script>
+                            $(function() {
+                            	$( "#datepicker" ).datepicker();
+                            });
+                            $(function() {
+                            	$( "#datepicker2" ).datepicker();
+                            });
+                            </script>
+
+                            <form class="form-inline" role="form">
+                            	<label class="col-sm-2 col-sm-2 control-label">Range of dates:</label>
+                            	<div class="form-group">
+                            		<label class="sr-only" for="exampleInputEmail2">From</label>
+                            		<input type="text" class="form-control" id="datepicker" placeholder="From">
+                            	</div>
+                            	<div class="form-group">
+                            		<label class="sr-only" for="exampleInputEmail2">To</label>
+                            		<input type="text" class="form-control" id="datepicker2" placeholder="To">
+                            	</div>
+                            </form>
+
+                            <button type="submit" class="btn btn-theme">Submit</button>
+
+                            
+                        </div>
+                    </div>
+                    
+                </section><!--/wrapper -->
+            </section><!-- /MAIN CONTENT -->

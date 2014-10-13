@@ -1,0 +1,64 @@
+{
+    "Users": [
+        {
+            "EID": 170487,
+            "First": "Larry",
+            "Last": "Liu",
+            "JFGroup": "Intern",
+            "JFPrimary": "Intern",
+            "City": "Sunnyvale",
+            "State": "California",
+            "Country": "United States of America",
+            "Zip": 94087,
+            "L2": "Jackie Reses",
+            "L3": "Allan Brown",
+            "L4": "Scott Judd",
+            "L5": "",
+            "L6": "",
+            "Manager ID": 163451,
+            "Hours": 999,
+            "Bio": "Blah blah blah",
+            "PictureURL": "http://i6.glitter-graphics.org/pub/678/678766kyjx9k273g.jpg",
+            "L2ID": 162168,
+            "Causes": [
+                "Environment",
+                "Animal Rights",
+                "STEM Education"
+            ],
+            "Badges": [
+                "STEM Champion",
+                "Saved the Earth"
+            ]
+        },
+
+        {
+        	"EID": 170520,
+            "First": "Kevin",
+            "Last": "Zhang",
+            "JFGroup": "Intern",
+            "JFPrimary": "Intern",
+            "City": "Berkeley",
+            "State": "California",
+            "Country": "United States of America",
+            "Zip": 94704,
+            "L2": "Adam Cahan",
+            "L3": "Tim Howes",
+            "L4": "Stephane Karoubi",
+            "L5": "Greg Choi",
+            "L6": "",
+            "Manager ID": 103294,
+            "Hours": 123,
+            "Bio": "Fascinating bio here",
+            "PictureURL": "http://33.media.tumblr.com/57287e300c21fdda26603ce0e0b78e84/tumblr_n08mc20A6E1tpo3v2o1_1280.jpg",
+            "L2ID": 103289,
+            "Causes": [
+                "Sports",
+                "Poverty"
+            ],
+            "Badges": [
+                "Humanitarian"
+            ]
+
+        }
+    ]
+}

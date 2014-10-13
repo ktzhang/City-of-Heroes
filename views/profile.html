@@ -1,0 +1,251 @@
+<!--main content start-->
+
+<section id="main-content" ng-controller="profileController">
+    <section class="wrapper site-min-height">
+            <div class="row">
+              <div class="col-lg-12">
+         <div class="col-lg-12 col-md-12 col-sm-12 mb">
+          <!-- WHITE PANEL - USER PROFILE -->
+          <div class="white-panel pn" style="padding-bottom: 10px;">
+            <div class="white-header">
+              <h5>Profile</h5>
+            </div>
+            <p><img src="assets/img/ui-zac.jpg" class="img-circle" width="150"></p>
+            <p><b><span ng-cloak class="ng-cloak">{{data.person.First}} {{data.person.Last}}</span></b></p>
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="small mt">Alter Ego</p>
+                  <p>Lady Bat</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="small mt">Mission Accomplished</p>
+                  <p>3924</p>
+                </div>
+              </div>
+          </div>
+        </div><!-- /col-md-4 -->
+         
+         <div class="tab-pane mb" id="chartjs">
+         <!--CAUSES PANEL-->
+                            <div class="col-lg-4">
+                                <div class="grey-panel pn-profile">
+                    <div class="grey-header">
+                      <h5>Causes</h5>
+                                      </div>
+                    	<div class="panel-body">
+					<button type="button" class="btn btn-success">Environmental</button>
+					<button type="button" class="btn btn-success">Pollution</button>
+					<button type="button" class="btn btn-info">Health</button>
+					<button type="button" class="btn btn-warning">Education</button>
+					<button type="button" class="btn btn-danger">Humanitarian</button>
+					<button type="button" class="btn btn-default">Civil Rights</button>
+					<button type="button" class="btn btn-success">Disasters</button>
+				        <button type="button" class="btn btn-primary">Animals</button>
+					<button type="button" class="btn btn-default">Discrimination</button>
+                                      </div>
+                              </div>
+                            </div>
+                </div><!--END OF CHART-->
+        
+        <div class="col-lg-4 col-md-4 col-sm-4 mb">
+              <!-- HOURS PANEL -->
+              <div class="green-panel pn-profile">
+                <div class="green-header">
+                  <h5>Hours Worked</h5>
+                </div>
+                <div class="chart mt">
+                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
+                </div>
+                <p class="mt" style="padding-bottom: 10px;"><b><span ng-cloak class="ng-cloak">102</span></b> Total Hours</p>
+              </div>
+
+      </div><!--/col-md-4 -->
+
+
+         <div class="col-lg-4 col-md-4 col-sm-4 mb">
+               <!-- SUPER POWERS -->
+          <div class="weather-2 pn-profile">
+            <div class="weather-2-header">
+              <div class="row">
+                <div>
+                  <p>Super Powers</p>
+                </div>
+              </div>
+            </div><!-- /weather-2 header -->
+            <div class="row data" style="padding-top: 10px">
+                          <!-- STRIPPED PROGRESS BARS -->
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
+            <p class="progress-label">Strength<br></p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                <span class="sr-only">20% Complete</span>
+              </div>
+            </div>
+            <p class="progress-label">Agility</p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                <span class="sr-only">60% Complete (warning)</span>
+              </div>
+            </div>
+            <p class="progress-label">Endurance</p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <span class="sr-only">80% Complete (danger)</span>
+              </div>
+            </div>              
+            <p class="progress-label">Computer Science</p>
+                </div>
+            </div><!--/col-md-4 -->
+
+
+
+                 </div><!--/row -->
+
+
+
+<div class="row" style="margin-top: ">
+              <div class="col-lg-12">
+         
+        <div class="col-lg-6 col-md-6 col-sm-6 mb">
+              <!-- TEAMS -->
+          <div class="ds pn">
+            <h3>Super Teams</h3>
+             <!-- First Member -->
+                             <div class="desc">
+                              <div class="thumb">
+                                <img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
+                                </div>
+                              <div class="details">
+                                  <p><a href="#">Middle Age Mutant Ninja Turtles</a><br/>
+                                     <muted>Undercover for good agents</muted>
+                                  </p>
+                                </div>
+                              </div>
+                            <!-- Second Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Soup Kitchen Squad</a><br/>
+                                     <muted>Soup Saturdays</muted>
+                                  </p>
+                              </div>
+                              </div>
+                              <!-- Third Member -->
+                            <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Friendly Force</a><br/>
+                                     <muted>Join the force to spread the friendliness.</muted>
+                                  </p>  
+                                </div>
+                             </div>
+                              <!-- Fourth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-zac.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">League of Volunteers</a><br/>
+                                     <muted>Legendary</muted>
+                                  </p>
+                                </div>
+                            </div>
+                              <!-- Fifth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Hack Legends</a><br/>
+                                      <muted>We hack for good.</muted>
+                                  </p>
+                                </div>
+                              </div>
+            </div>
+        </div><!--/col-md-4 -->
+
+
+         <div class="col-lg-6 col-md-6 col-sm-6 mb">
+              <!-- TEAMS -->
+          <div class="ds pn">
+            <h3>Achievements</h3>
+             <!-- First Member -->
+                             <div class="desc">
+                              <div class="thumb">
+                                <img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                                </div>
+                              <div class="details">
+                                  <p><a href="#">Red Flash</a><br/>
+                                     <muted>Fastest Responder</muted>
+                                  </p>
+                                </div>
+                              </div>
+                            <!-- Second Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://fc04.deviantart.net/fs70/i/2012/306/1/1/captain_america__s_shield_by_kiadas-d5jqvp8.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Captain America</a><br/>
+                                     <muted>America's best volunteer</muted>
+                                  </p>
+                              </div>
+                              </div>
+                              <!-- Third Member -->
+                            <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://4.bp.blogspot.com/-6sssh4cAX3A/Tv5B3Ao3fkI/AAAAAAAABMU/8n10ODWZM7Q/s1600/Superman.gif" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Super Person</a><br/>
+                                     <muted>Best Quality Volunteering</muted>
+                                  </p>  
+                                </div>
+                             </div>
+                              <!-- Fourth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://quebuentrip.com/mail/superhero-logos-black-and-white-i13.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Spidey Senses</a><br/>
+                                     <muted>Wow. much senses. so agile. </muted>
+                                  </p>
+                                </div>
+                            </div>
+                              <!-- Fifth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Moose</a><br/>
+                                      <muted>You are a moose.</muted>
+                                  </p>
+                                </div>
+                              </div>
+                </div>
+            </div><!--/col-md-4 -->
+
+
+        </div><! --/row -->
+
+
+
+      
+    </section><! --/wrapper -->
+</section><!-- /MAIN CONTENT -->
+
+            <!--main content end-->
+

@@ -1,0 +1,1 @@
+var SIDEBARSPEED = 500;

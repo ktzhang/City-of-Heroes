@@ -1,0 +1,23 @@
+<section id="main-content" ng-controller="teamModuleController">
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-lg-14 ds">
+
+				<!-- USERS ONLINE SECTION -->
+				<h2>Team {{team.id}}</h2>
+				<!-- First Member -->
+				<div class="desc" ng-repeat="member in team.members">
+					<div class="thumb">
+						<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
+					</div>
+					<div class="details">
+						<p><a href="#">{{member.First}} {{member.Last}}</a><br/>
+							<muted>{{member.JFPrimary}}</muted>
+						</p>
+					</div>
+				</div>
+			</div> <!-- /col-lg-3 -->
+		</div><!--/row -->
+	</section>
+</section>
+

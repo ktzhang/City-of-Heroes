@@ -1,0 +1,208 @@
+ <section id="main-content" ng-controller="leaderboardController">
+ 	<section class="wrapper">
+ 		<div class="row">
+ 			<div class="col-lg-14 ds">
+ 				<h2>Hall of Fame</h2>
+
+
+ 				<div class="panel-group" id="accordion">
+ 					<div class="panel panel-default">
+ 						<div class="panel-heading">
+ 							<h4 class="panel-title">
+ 								<a class="accordion-toggle" ng-click="leaderboard.doClick($event)" data-toggle="collapse" href="leaderboard.html#collapseOne">
+ 									<h4><i class="fa fa-angle-down"></i> L2 Rankings</h4>
+ 								</a>
+ 							</h4>
+ 						</div>
+ 						<div id="collapseOne" class="panel-collapse collapse in">
+ 							<div class="panel-body">
+ 								<table class="table">
+ 									<thead>
+ 										<tr>
+ 											<th>Rank</th>
+ 											<th>L2</th>
+ 											<th># of Members</th>
+ 											<th>% Participation</th>
+ 										</tr>
+ 									</thead>
+ 									<tbody>
+ 										<tr>
+ 											<td>1</td>
+ 											<td>Jackie Reses</td>
+ 											<td>422</td>
+ 											<td>97%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>2</td>
+ 											<td>Adam Cahan</td>
+ 											<td>544</td>
+ 											<td>93%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>3</td>
+ 											<td>Laurence Mann</td>
+ 											<td>1071</td>
+ 											<td>91%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>4</td>
+ 											<td>Kathy Savitt</td>
+ 											<td>1350</td>
+ 											<td>87%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>5</td>
+ 											<td>Jay Rossiter</td>
+ 											<td>1474</td>
+ 											<td>84%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>6</td>
+ 											<td>Mike Kerns</td>
+ 											<td>866</td>
+ 											<td>80%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>7</td>
+ 											<td>Scott Burke</td>
+ 											<td>999</td>
+ 											<td>78%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>8</td>
+ 											<td>Jeff Bonforte</td>
+ 											<td>383</td>
+ 											<td>77%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>9</td>
+ 											<td>Ron Bell</td>
+ 											<td>205</td>
+ 											<td>76%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>10</td>
+ 											<td>Ken Goldman</td>
+ 											<td>471</td>
+ 											<td>73%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>11</td>
+ 											<td>Ned Brody</td>
+ 											<td>443</td>
+ 											<td>61%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>12</td>
+ 											<td>Dawn Airey</td>
+ 											<td>436</td>
+ 											<td>48%</td>
+ 										</tr>
+ 										<tr>
+ 											<td>13</td>
+ 											<td>Rose Tsou</td>
+ 											<td>1548</td>
+ 											<td>42%</td>
+ 										</tr>
+ 									</tbody>
+ 								</table>
+ 							</div>
+ 						</div>
+ 					</div>
+ 					<div class="panel panel-default">
+ 						<div class="panel-heading">
+ 							<h4 class="panel-title">
+ 								<a class="accordion-toggle" ng-click="leaderboard.doClick($event)" data-toggle="collapse" href="leaderboard.html#collapseTwo">
+ 									<h4><i class="fa fa-angle-right"></i> Most Heroic in Your Organization</h4>
+ 								</a>
+ 							</h4>
+ 						</div>
+ 						<div id="collapseTwo" class="panel-collapse collapse">
+ 							<div class="panel-body">
+ 								<table class="table">
+ 									<thead>
+ 										<tr>
+ 											<th>Rank</th>
+ 											<th>Employee Name</th>
+ 											<th># of hours volunteered</th>
+ 										</tr>
+ 									</thead>
+ 									<tbody>
+ 										<tr>
+ 											<td>1</td>
+ 											<td>Winnie Xu</td>
+ 											<td>285</td>
+ 										</tr>
+ 										<tr>
+ 											<td>2</td>
+ 											<td>Kevin Zhang</td>
+ 											<td>248</td>
+ 										</tr>
+ 										<tr>
+ 											<td>3</td>
+ 											<td>Ishan Choudhury</td>
+ 											<td>246</td>
+
+ 										</tr>
+ 										<tr bgcolor="#B6DDFC">
+ 											<td>102</td>
+ 											<td>Me!</td>
+ 											<td>76</td>
+ 										</tr>
+ 									</tbody>
+ 								</table>
+ 							</div>
+ 						</div>
+ 					</div>
+ 					<div class="panel panel-default">
+ 						<div class="panel-heading">
+ 							<h4 class="panel-title">
+ 								<a class="accordion-toggle" ng-click="leaderboard.doClick($event)" data-toggle="collapse" href="leaderboard.html#collapseThree">
+ 									<h4><i class="fa fa-angle-right"></i> Most Heroic Team</h4>
+ 								</a>
+ 							</h4>
+ 						</div>
+ 						<div id="collapseThree" class="panel-collapse collapse">
+ 							<div class="panel-body">
+ 								<table class="table">
+ 									<thead>
+ 										<tr>
+ 											<th>Rank</th>
+ 											<th>Team Name</th>
+ 											<th>Manhours Volunteered</th>
+ 										</tr>
+ 									</thead>
+ 									<tbody>
+ 										<tr>
+ 											<td>1</td>
+ 											<td>Fantastic 14</td>
+ 											<td>421</td>
+ 										</tr>
+ 										<tr>
+ 											<td>2</td>
+ 											<td>Error Not Found Squad</td>
+ 											<td>404</td>
+ 										</tr>
+ 										<tr>
+ 											<td>3</td>
+ 											<td>Legion of Boom</td>
+ 											<td>387</td>
+ 										</tr>
+ 										<tr height="10px">
+ 										</tr>
+ 										<tr bgcolor="#B6DDFC">
+ 											<td>46</td>
+ 											<td>Middleaged Mutant Ninja Turtles</td>
+ 											<td>102</td>
+ 										</tr>
+ 									</tbody>
+ 								</table>
+ 							</div>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div> <!-- /col-lg-12 -->
+ 		</div><!-- /row -->
+
+ 	</section><!--/wrapper -->
+</section><!-- /MAIN CONTENT -->

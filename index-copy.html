@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cityOfHeroes">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>DASHGUM - FREE Bootstrap Admin Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
+    
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <script src="assets/js/chart-master/Chart.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="assets/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-cookies.js"></script>
+    <script src="assets/js/consts.js"></script>
+
+    <script>
+        angular.module("cityOfHeroes", ["ngRoute", "ngCookies"])
+        .config(function ($routeProvider) {
+
+          $routeProvider.when("/main", {
+              templateUrl: "views/mission_control.html",
+              activetab: 'main',
+          });
+          $routeProvider.when("/buttons", {
+              templateUrl: "views/buttons.html",
+              activetab: 'buttons',
+          });
+          $routeProvider.when("/leaderboard", {
+              templateUrl: "views/leaderboard.html",
+              activetab: 'leaderboard',
+          });
+          $routeProvider.when("/myteams", {
+              templateUrl: "views/myteams.html",
+              activetab: 'myteams',
+          });
+          $routeProvider.when("/profile", {
+              templateUrl: "views/profile.html",
+              activetab: 'profile',
+          });
+          $routeProvider.when("/mapSearch", {
+              templateUrl: "views/map.html",
+              activetab: 'myteams',
+          });
+
+          //Opportunities stuff
+          $routeProvider.when("/opp/details", {
+              templateUrl: "views/mission_details.html",
+              activetab: 'opportunities',
+              controller: "oppController",
+              tab: "details"
+          });
+
+          $routeProvider.when("/opp/shifts", {
+              templateUrl: "views/acceptOppShifts.html",
+              activetab: 'opportunities',
+              controller: "oppController",
+              tab: "shifts"
+
+
+          });
+
+          $routeProvider.when("/opp/selectTeam", {
+              templateUrl: "views/acceptOppSelectTeam.html",
+              activetab: 'opportunities',
+              controller: "oppController",
+              tab: "selectTeam"
+          });
+
+          $routeProvider.when("/opp/invitation", {
+              templateUrl: "views/acceptOppShifts.html",
+              activetab: 'opportunities',
+              controller: "oppController",
+              tab: "invitation"
+          });
+
+          $routeProvider.when("/opp/confirmation", {
+              templateUrl: "views/acceptOppConfirmation.html",
+              activetab: 'opportunities',
+              controller: "oppController",
+              tab: "confirmation"
+          });
+
+          $routeProvider.when("/addTeam", {
+              templateUrl: "views/search_friends.html",
+              activetab: 'myteams',
+          });
+          
+
+
+          //Default navigation
+          $routeProvider.otherwise({
+              templateUrl: "views/mission_control.html",
+              activetab: 'main',
+          });
+        })
+
+
+        // .factory("oppData", function () {
+        //   var oppData = [];
+        //   return {
+        //     setOppData: function(data) {
+        //       oppData = data;
+        //     }
+        //     getOppData: function () {
+        //       return oppData;
+        //     }
+        //   }
+        // })
+
+
+
+
+
+        //Store opp id
+        .service('oppData', function () {
+            var property = [];
+
+            return {
+                getOppData: function () {
+                    return property;
+                },
+                setOppData: function(value) {
+                    property = value;
+                }
+            };
+        })
+
+        .service('userData', function ($http) {
+            var userData = [];
+            var dataUrl = "http://airnature.corp.yahoo.com/cityofheroes/getuserdata.php?id=";
+            var dataUrlYID = "http://airnature.corp.yahoo.com/cityofheroes/getuserdataByYID.php?yid=";
+
+            $http.get(dataUrl.concat("143141"))
+            .success(function (data) {
+              console.log(data[0]);
+              userData = data[0];
+              // console.log($scope.data.person.First);
+
+            })
+            .error(function (error) {
+              console.log("fail");
+              // $scope.data.error = error;
+            });
+
+            return {
+              getUserData: function() {
+                return userData;
+              },
+              setUserByData: function(data) {
+                userData = data;
+              },
+              setUserById: function(id, callback) {
+                console.log(dataUrl.concat(id));
+
+                $http.get(dataUrl.concat(id))
+                .success(function (data) {
+                  console.log(data[0]);
+                  userData = data[0];
+                  callback();
+                })
+                .error(function (error) {
+                  console.log("fail");
+                  // $scope.data.error = error;
+                });
+              },
+              setUserByYId: function(id, callback) {
+                console.log(dataUrlYID.concat(id));
+
+                $http.get(dataUrlYID.concat(id))
+                .success(function (data) {
+                  console.log(data[0]);
+                  userData = data[0];
+                  callback();
+                })
+                .error(function (error) {
+                  console.log("fail");
+                  // $scope.data.error = error;
+                });
+              }
+            }
+        })
+        //Grabbing the data
+        // $scope.data = {};
+        // $scope.data.person = {};
+          
+
+        .controller("navControl", function($scope, $route, $routeParams, $element, $cookieStore, $cookies, $location, userData) {
+
+          //var someSessionObj = { 'innerObj' : 'somesessioncookievalue'};
+          /*
+           $cookies.dotobject = someSessionObj;
+            $scope.usingCookies = { 'cookies.dotobject' : $cookies.dotobject, "cookieStore.get" : $cookieStore.get('dotobject') };
+
+           $cookieStore.put('obj', someSessionObj);
+          $scope.usingCookieStore = { "cookieStore.get" : $cookieStore.get('obj'), 'cookies.dotobject' : $cookies.obj, };
+          */
+
+          //$cookieStore.put("thisYID", "hrlarry"); //Change to UID from login modal
+          // $cookieStore.put("thisEID", "143142");
+          //$cookieStore.thisEID = "143142"; //($cookieStore.thisYID).toEID();
+
+          // $scope.thisEID = $cookieStore.get('thisEID');
+          // $scope.thisYID = $cookieStore.get('thisYID');
+          // $scope.thisEID = 143141;
+          // $scope.newYID = $cookies.userID;
+
+          //Exposing the root
+          $scope.$route = $route;
+          $scope.topbar = {};
+
+          //Grabbing the userdata
+          $scope.thisYID = getUrlVars()['YID'];
+          console.log($scope.thisYID + " " + $scope.newYID + " " + window.location.href);
+          function getUrlVars() {
+              var vars = {};
+              var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                  vars[key] = value;
+              });
+              return vars;
+          }
+
+
+          $scope.data = {};
+          $scope.data.person = userData.getUserData();
+
+          //Grabbing user data from cookie
+
+          $scope.grabUserDatafromCookie = function() {
+
+            if($scope.thisYID && $scope.data.person.YID != $scope.thisYID) {
+              userData.setUserByYId($scope.thisYID, function() {
+                $scope.data.person = userData.getUserData();
+              });
+            }
+          };
+          $scope.grabUserDatafromCookie();
+
+
+          //Default topbar settings
+          $scope.topbar.leftText = "CITY OF HEROES";
+          $scope.topbar.selection = "home";
+          $scope.topbar.leftLink = "";
+          $scope.topbar.rightLink = "bye.html";
+          $scope.topbar.rightText = "Sup!";
+
+          $("#sidebar").addClass("closed");
+          $scope.navigate = function(stuffs) {
+            console.log(stuffs);
+          }
+          $scope.showHideSideBar = function(speed) {
+            if($scope.topbar.selection == "home") {
+              // console.log("show nav" + $('#sidebar').css("margin-left") );
+              // var isHidden = $('#sidebar > ul').offset().left == -210; $('#sidebar').css("margin-left") == -210 ||
+              var isHidden =  $("#sidebar").hasClass("closed");
+              var newSpeed = speed ? speed : SIDEBARSPEED; 
+
+              if (isHidden === false) {
+                              console.log("hiding bar nav");
+
+                  hideSideBar(speed);
+              } else {
+                              console.log("showing bar nav");
+
+                  showSideBar(speed);
+
+              }
+            } else if ($scope.topbar.selection == "navigate") {
+              console.log($scope.topbar.leftLink);
+              $(location).attr('href',$scope.topbar.leftLink);
+            }
+          }
+
+          function hideSideBar(speed) {
+               if(isDesktop) {
+                  $('#main-content').css({
+                      'margin-left': '0px'
+                  });
+              }
+              $('#sidebar').animate({
+                  'margin-left': '-210px'
+              }, speed);
+              // $('#sidebar > ul').hide();
+              $("#container").addClass("sidebar-closed");
+              $("#sidebar").addClass("closed");
+
+          }
+
+          function showSideBar(speed) {
+              if(isDesktop) {
+                  $('#main-content').css({
+                      'margin-left': '210px'
+                  });
+              }
+              // $('#sidebar > ul').show();
+              $('#sidebar').animate({
+                  'margin-left': '0'
+              }, speed);
+              $("#container").removeClass("sidebar-closed");
+              $("#sidebar").removeClass("closed");
+
+          }
+        })
+        ;
+
+    </script>
+    <script src="controllers/leaderboard.js"></script>
+    <script src="controllers/myteams.js"></script>
+    <script src="controllers/map.js"></script>
+    <script src="controllers/profile.js"></script>
+    <script src="controllers/opp.js"></script>
+    <script src="controllers/searchFriends.js"></script>
+
+    <script src="assets/js/angular-route.js"></script>
+    <script type="text/javascript">window.setTimeout("document.getElementById('splash').style.display='none';", 18000); </script>
+  </head>
+
+  <body ng-controller="navControl">
+  <section id="container" >
+  <div style="display:none;">
+    <audio controls autoplay>
+    <source src="./assets/audio/city_of_heroes.mp3" preload="auto">
+    Your browser does not support the audio element.
+   </audio>
+  </div>
+      <div id="splash"><img style="width: 400px;" src="./assets/img/city-of-heros-splash.png"/></div>
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg" >
+        <div class="select" ng-click="showHideSideBar()"></div>
+              <div class="sidebar-toggle-box" ng-switch on="topbar.selection">
+                  <div ng-switch-when="home" ng-click="showHideSideBar()" class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                  <a href="{{topbar.leftLink}}" ng-switch-when="navigate"><div class="fa fa-angle-left tooltips" data-placement="right" data-original-title="Toggle Navigation"></div></a>
+              </div>
+            <!--logo start-->
+            <a href="{{topbar.leftLink}}" class="logo"><b><span ng-bind="topbar.leftText"></span></b></a>
+            <!--logo end-->
+            <div class="nav pull-right notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge bg-theme">4</span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 4 pending missions</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Join forces with Team Rocket</div>
+				        <button type="button" class="btn btn-success">Accept</button>
+				        <button type="button" class="btn btn-danger">Decline</button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">The Red Cross needs you now!</div>
+				        <button type="button" class="btn btn-success">Accept</button>
+				        <button type="button" class="btn btn-danger">Decline</button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Join forces with Dynamic Trio</div>
+				        <button type="button" class="btn btn-success">Accept</button>
+				        <button type="button" class="btn btn-danger">Decline</button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc"></div>
+                                        <div class="percent">70%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                            <span class="sr-only">70% Complete (Important)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="external">
+                                <a href="#">See All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- inbox dropdown start-->
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge bg-theme">5</span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 5 new messages</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Zac Snider</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                    <span class="message">
+                                        Hi mate, how is everything?
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Divya Manian</span>
+                                    <span class="time">40 mins.</span>
+                                    </span>
+                                    <span class="message">
+                                     Hi, I need your help with this.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                    </span>
+                                    <span class="message">
+                                        Love your new Dashboard.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                    </span>
+                                    <span class="message">
+                                        Please, answer asap.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">See all messages</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- inbox dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+              <ul class="nav pull-right top-menu">
+                    <li>
+                      <a class="logout" href="{{topbar.rightLink}}"><span ng-bind="topbar.rightText"></span></a>
+                    </li>
+              </ul>
+            </div>
+        </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+                  <a href="#/profile" ng-click="showHideSideBar(0)" >
+                  <p class="centered"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></p>
+                  <h5 class="centered"><span ng-cloak class="ng-cloak">{{data.person.First}} {{data.person.Last}}</span></h5>
+                  </a>
+                  <li class="sub-menu">
+                      <a ng-class="{active: $route.current.activetab == 'opportunities'}" href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Missions</span>
+                      </a>
+                      <!-- <ul class="sub">
+                          <li><a  href="basic_table.html">Basic Table</a></li>
+                          <li><a  href="responsive_table.html">Responsive Table</a></li>
+                      </ul> -->
+                  </li>
+                    
+                  <li class="sub-menu">
+                      <a ng-class="{active: $route.current.activetab == 'main'}" href="index.html" >
+                          <i class="fa fa-dashboard"></i>
+                          <span>Mission Control</span>
+                      </a>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a ng-class="{active: $route.current.activetab == 'leaderboard'}" href="#/leaderboard" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Leaderboard</span>
+                      </a>
+                  <!--     <ul class="sub">
+                          <li><a  href="general.html">General</a></li>
+                          <li ng-class="{active: $route.current.activetab == 'buttons'}">
+                            <a  href="#/buttons"><span>Buttons</a>
+                          </li>
+                          <li><a  href="panels.html">Panels</a></li>
+                      </ul> -->
+                  </li>
+
+                  <li class="sub-menu">
+                      <a ng-class="{active: $route.current.activetab == 'myteams'}" href="#/myteams" >
+                          <i class="fa fa-cogs"></i>
+                          <span>My Teams</span>
+                      </a>
+                      <!-- <ul class="sub">
+                          <li><a  href="calendar.html">Calendar</a></li>
+                          <li><a  href="gallery.html">Gallery</a></li>
+                          <li><a  href="todo_list.html">Todo List</a></li>
+                      </ul> -->
+                  </li>
+                  <li class="sub-menu">
+                      <a ng-class="{active: $route.current.activetab == 'logout'}" href="#/logout" >
+                          <i class="fa fa-book"></i>
+                          <span>Logout</span>
+                      </a>
+                      <!-- ul class="sub">
+                          <li><a  href="blank.html">Blank Page</a></li>
+                          <li><a  href="login.html">Login</a></li>
+                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                      </ul> -->
+                  </li>
+                  <!-- <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-tasks"></i>
+                          <span>Forms</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="form_component.html">Form Components</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Data Tables</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="basic_table.html">Basic Table</a></li>
+                          <li><a  href="responsive_table.html">Responsive Table</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class=" fa fa-bar-chart-o"></i>
+                          <span>Charts</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="morris.html">Morris</a></li>
+                          <li><a  href="chartjs.html">Chartjs</a></li>
+                      </ul>
+                  </li> -->
+
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+<!--main content start-->
+
+<section id="main-content" ng-controller="profileController">
+    <section class="wrapper site-min-height">
+            <div class="row">
+              <div class="col-lg-12">
+         <div class="col-lg-12 col-md-12 col-sm-12 mb">
+          <!-- WHITE PANEL - USER PROFILE -->
+          <div class="white-panel pn" style="padding-bottom: 10px;">
+            <div class="white-header">
+              <h5>Profile</h5>
+            </div>
+            <p><img src="assets/img/ui-zac.jpg" class="img-circle" width="150"></p>
+            <p><b><span ng-cloak class="ng-cloak">{{data.person.First}} {{data.person.Last}}</span></b></p>
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="small mt">Alter Ego</p>
+                  <p>Lady Bat</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="small mt">Mission Accomplished</p>
+                  <p>3924</p>
+                </div>
+              </div>
+          </div>
+        </div><!-- /col-md-4 -->
+         
+         <div class="tab-pane mb" id="chartjs">
+         <!--CAUSES PANEL-->
+                            <div class="col-lg-4">
+                                <div class="grey-panel pn-profile">
+                    <div class="grey-header">
+                      <h5>Causes</h5>
+                                      </div>
+                    	<div class="panel-body">
+					<button type="button" class="btn btn-success">Environmental</button>
+					<button type="button" class="btn btn-success">Pollution</button>
+					<button type="button" class="btn btn-info">Health</button>
+					<button type="button" class="btn btn-warning">Education</button>
+					<button type="button" class="btn btn-danger">Humanitarian</button>
+					<button type="button" class="btn btn-default">Civil Rights</button>
+					<button type="button" class="btn btn-success">Disasters</button>
+				        <button type="button" class="btn btn-primary">Animals</button>
+					<button type="button" class="btn btn-default">Discrimination</button>
+                                      </div>
+                              </div>
+                            </div>
+                </div><!--END OF CHART-->
+        
+        <div class="col-lg-4 col-md-4 col-sm-4 mb">
+              <!-- HOURS PANEL -->
+              <div class="green-panel pn-profile">
+                <div class="green-header">
+                  <h5>Hours Worked</h5>
+                </div>
+                <div class="chart mt">
+                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
+                </div>
+                <p class="mt" style="padding-bottom: 10px;"><b><span ng-cloak class="ng-cloak">{{data.person.Hours}}</span></b> Total Hours</p>
+              </div>
+
+      </div><!--/col-md-4 -->
+
+
+         <div class="col-lg-4 col-md-4 col-sm-4 mb">
+               <!-- SUPER POWERS -->
+          <div class="weather-2 pn-profile">
+            <div class="weather-2-header">
+              <div class="row">
+                <div>
+                  <p>Super Powers</p>
+                </div>
+              </div>
+            </div><!-- /weather-2 header -->
+            <div class="row data" style="padding-top: 10px">
+                          <!-- STRIPPED PROGRESS BARS -->
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
+            <p class="progress-label">Strength<br></p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                <span class="sr-only">20% Complete</span>
+              </div>
+            </div>
+            <p class="progress-label">Agility</p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                <span class="sr-only">60% Complete (warning)</span>
+              </div>
+            </div>
+            <p class="progress-label">Endurance</p>
+            
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <span class="sr-only">80% Complete (danger)</span>
+              </div>
+            </div>              
+            <p class="progress-label">Computer Science</p>
+                </div>
+            </div><!--/col-md-4 -->
+
+
+
+                 </div><!--/row -->
+
+
+
+<div class="row" style="margin-top: ">
+              <div class="col-lg-12">
+         
+        <div class="col-lg-6 col-md-6 col-sm-6 mb">
+              <!-- TEAMS -->
+          <div class="ds pn">
+            <h3>Super Teams</h3>
+             <!-- First Member -->
+                             <div class="desc">
+                              <div class="thumb">
+                                <img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
+                                </div>
+                              <div class="details">
+                                  <p><a href="#">Middle Age Mutant Ninja Turtles</a><br/>
+                                     <muted>Undercover for good agents</muted>
+                                  </p>
+                                </div>
+                              </div>
+                            <!-- Second Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Soup Kitchen Squad</a><br/>
+                                     <muted>Soup Saturdays</muted>
+                                  </p>
+                              </div>
+                              </div>
+                              <!-- Third Member -->
+                            <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Friendly Force</a><br/>
+                                     <muted>Join the force to spread the friendliness.</muted>
+                                  </p>  
+                                </div>
+                             </div>
+                              <!-- Fourth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-zac.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">League of Volunteers</a><br/>
+                                     <muted>Legendary</muted>
+                                  </p>
+                                </div>
+                            </div>
+                              <!-- Fifth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Hack Legends</a><br/>
+                                      <muted>We hack for good.</muted>
+                                  </p>
+                                </div>
+                              </div>
+            </div>
+        </div><!--/col-md-4 -->
+
+
+         <div class="col-lg-6 col-md-6 col-sm-6 mb">
+              <!-- TEAMS -->
+          <div class="ds pn">
+            <h3>Achievements</h3>
+             <!-- First Member -->
+                             <div class="desc">
+                              <div class="thumb">
+                                <img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                                </div>
+                              <div class="details">
+                                  <p><a href="#">Red Flash</a><br/>
+                                     <muted>Fastest Responder</muted>
+                                  </p>
+                                </div>
+                              </div>
+                            <!-- Second Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://fc04.deviantart.net/fs70/i/2012/306/1/1/captain_america__s_shield_by_kiadas-d5jqvp8.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Captain America</a><br/>
+                                     <muted>America's best volunteer</muted>
+                                  </p>
+                              </div>
+                              </div>
+                              <!-- Third Member -->
+                            <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://4.bp.blogspot.com/-6sssh4cAX3A/Tv5B3Ao3fkI/AAAAAAAABMU/8n10ODWZM7Q/s1600/Superman.gif" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Super Person</a><br/>
+                                     <muted>Best Quality Volunteering</muted>
+                                  </p>  
+                                </div>
+                             </div>
+                              <!-- Fourth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="http://quebuentrip.com/mail/superhero-logos-black-and-white-i13.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Spidey Senses</a><br/>
+                                     <muted>Wow. much senses. so agile. </muted>
+                                  </p>
+                                </div>
+                            </div>
+                              <!-- Fifth Member -->
+                              <div class="desc">
+                                <div class="thumb">
+                                  <img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                                </div>
+                                <div class="details">
+                                  <p><a href="#">Moose</a><br/>
+                                      <muted>You are a moose.</muted>
+                                  </p>
+                                </div>
+                              </div>
+                </div>
+            </div><!--/col-md-4 -->
+
+
+        </div><! --/row -->
+
+
+
+      
+    </section><! --/wrapper -->
+</section><!-- /MAIN CONTENT -->
+
+            <!--main content end-->
+
+      
+      <!--main content end-->
+       
+      
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-1.8.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type=p"text/javascript"></script>
+    <script src="assets/js/jquery.sparkline.js"></script>
+    <script src="assets/js/leaderboard.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    
+
+
+    <!--common script for all pages-->
+    <script src="assets/js/common-scripts.js"></script>
+    
+    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
+    <!--script for this page-->
+    <script src="assets/js/sparkline-chart.js"></script>    
+    <script src="assets/js/zabuto_calendar.js"></script>
+    <script src="assets/js/chart-master/Chart.js"></script>
+    <script src="assets/js/form-component.js"></script> 
+    <script src="assets/js/bootstrap-switch.js"></script>
+    <script src="assets/js/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+	
+	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+  
+   <script type="text/javascript">
+ //        $(document).ready(function () {
+ //        var unique_id = $.gritter.add({
+ //            // (string | mandatory) the heading of the notification
+ //            title: 'Welcome to Dashgum!',
+ //            // (string | mandatory) the text inside the notification
+ //            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
+ //            // (string | optional) the image to display on the left
+ //            image: 'assets/img/ui-sam.jpg',
+ //            // (bool | optional) if you want it to fade out on its own or just sit there
+ //            sticky: true,
+ //            // (int | optional) the time you want it to be alive for before fading out
+ //            time: '',
+ //            // (string | optional) the class name you want to apply to that specific message
+ //            class_name: 'my-sticky-class'
+ //        });
+
+ //        return false;
+ //        });
+  // </script>
+  
+  <script type="application/javascript">
+        $(document).ready(function () {
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+        
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
+        });
+        
+        
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    </script>
+  
+
+  </body>
+</html>
